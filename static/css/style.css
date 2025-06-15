@@ -1,0 +1,65 @@
+/* Additional custom styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.card {
+    transition: all 0.3s ease;
+}
+
+/* Improved form styling */
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Summary text styling */
+#summaryText, #videoSummaryText, #modalSummary {
+    font-size: 1rem;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+/* Tab styling */
+.nav-tabs .nav-link {
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+}
+
+/* Loading animation enhancement */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.spinner-border {
+    animation: spinner-border 1s linear infinite, pulse 2s infinite;
+}
+
+/* History items */
+.history-item {
+    transition: all 0.2s ease-in-out;
+}
+
+.history-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Footer styling */
+footer {
+    margin-top: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1rem;
+    }
+}
+

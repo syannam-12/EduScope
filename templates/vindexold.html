@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text & Video Summarization</title>
+    <script>
+        async function summarizeText() {
+            const topic = document.getElementById("topic").value;
+            const url = document.getElementById("text-url").value;
+
+            if (!topic && !url) {
+                alert("Please enter a topic or a URL.");
+                return;
+            }
+
+            const response = await fetch("/summarize-text", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(topic ? { topic } : { url })
+            });
+
+            const data = await response.json();
+            document.getElementById("text-summary").innerText = data.summary || data.error;
+        }
+
+        async function summarizeVideo() {
+            const videoUrl = document.getElementById("video-url").value;
+            const fileInput = document.getElementById("video-file");
+
+            const formData = new FormData();
+            if (videoUrl) {
+                formData.append("url", videoUrl);
+                const response = await fetch("/summarize-video-url", {
+                    method: "POST",
+                    body: formData
+                });
+    
+                const data = await response.json();
+                document.getElementById("video-summary").innerText = data.summary || data.error;
+            } else if (fileInput.files.length > 0) {
+                formData.append("file", fileInput.files[0]);
+                const response = await fetch("/summarize-video", {
+                    method: "POST",
+                    body: formData
+                });
+    
+                const data = await response.json();
+                document.getElementById("video-summary").innerText = data.summary || data.error;
+            } else {
+                alert("Please provide a video URL or upload a file.");
+                return;
+            }
+
+            
+        }
+    </script>
+</head>
+<body>
+    <h1>Text & Video Summarization</h1>
+
+    <h2>Text Summarization</h2>
+    <input type="text" id="topic" placeholder="Enter topic">
+    <input type="text" id="text-url" placeholder="Enter URL">
+    <button onclick="summarizeText()">Summarize</button>
+    <p id="text-summary"></p>
+
+    <h2>Video Summarization</h2>
+    <input type="text" id="video-url" placeholder="Enter video URL">
+    <input type="file" id="video-file" accept="video/*">
+    <button onclick="summarizeVideo()">Summarize</button>
+    <p id="video-summary"></p>
+</body>
+</html>

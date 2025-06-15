@@ -1,0 +1,11 @@
+Flask
+requests
+beautifulsoup4
+sumy
+googlesearch-python
+wikipedia-api
+nltk
+SpeechRecognition
+pytube
+pydub
+yt-dlp
